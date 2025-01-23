@@ -1,20 +1,19 @@
 My first C++ project. 
-A small json parser to use on other programs.
+A small JSON parser to use on other C++ programs.
 
 Disclaimer: 
 I am not trying to make a perfect parser. 
-Making a json parser should be relatively simple and give me an idea of how parsers work. 
+Making a JSON parser should be relatively simple and give me an idea of how parsers and lexers work.
 
-Ultimately, I just want this project to be functional.
+Therefore, I chose it as a first project to actually get to completion.
+Ultimately, I just want this project to be functional. And to be able to use it in future projects.
 
-json file("filename.json") -> openfile(name); start() -> {"object1":ID, "array":ID, "object2":ID};
+Once it is public, any feedback would be appreciated. I am not really new to the software devlopment world, but I am not experienced in it either.
+I just kind of dipped my toes into different programming areas over the last three or four years. From simple python programs to web development.
+From web development to graphics. From there to trying leetcode and realizing my profound lack of knoweldge of data structures and algorithms.
+I really have much to learn. I didn't dedicate enough time to any of those things to actually finish a project... So, I've decided that it is time that I actually make a project.
 
-file["object1"] -> ID; ID ->  file_position, int type, bool parsed, 
+A few months ago I tried C in order to see what a 'low level language' was like. I really liked it.
 
-elements_list(vector<Element>) -> [element0, element1, element3] -> element0.properties(vector<Property>), element.type = _array;
-
-object_list(unordered_map<string name, Property>)
-
-Property -> string value, int type, vector<Property>* pointer; //if pointer is null then the element hasn't been parsed or cannot be parsed(because of type or error)
-
-file["object1"] -> ID; ID contains: element file position, int type, bool parsed,
+The syntax is nice and the manual memory management isn't that scary. There is a lot of talk about pointers and how they can make your program go -BOOM-.
+But overall the experience is nice. Now I think that since the walk through the land of C was so enjoyable. It maybe is time to see what C++ has in store.
