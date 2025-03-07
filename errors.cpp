@@ -20,7 +20,6 @@ class error{
         string description;
         int last_position = 0;
         int line;
-        vector<int> lines; //contain the position of the new line characters
 
     public:
         //constructor initialize the error class data
