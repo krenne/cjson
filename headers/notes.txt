@@ -1,0 +1,38 @@
+Note 1:
+----
+Currently the main objective is making the functions process strings instead of going throught the file.
+This should be simple, just use indexing and for (auto character:string) for loops. 
+
+Note 2:
+----
+Something to keep in mind is how to tackle cases where a user requests certain value, but it is not a property that can be converted into a value(string, int, etc...)
+In those cases, it could be ideal to return an instance of the json class, so that the user can parse the object further later in the program.
+And doing that would imply going to the old idea of having the json class output other instances of itself, which could be hard to organize.
+
+Note 3:
+----
+If the user attempts to print out a json element(an array or object), there exists the possibility that an overloaded '<<' operator function could be called.
+This function would get and output the string content of the array or object, while keeping the element itself intact. 
+
+So you would have something that looks like this:
+
+int main(){
+    json file("filename.json"); //opens the file and gets it contents as a string
+    json element = file["array"]; //get the array
+
+    cout << "Element: " << element; // '<<' function is called, returns the element's json string 
+
+    return 0;
+}
+
+This may or may not be possible depending on how the overloaded operator function actually works...
+But considering that the value is expected to be on the right operator<<(json element), I think it would work.
+
+Note 4:
+
+//using a vector pointer for arrays(to allow indexing), using and unordered_map pointer for maps
+json -> string jstr(json string), int type, vector<Property>* array, unordered_map<string, vector<Property>>* properties
+if type == 0 -> vector<Property>*;
+if type == 1 -> unordered_map<string, vector<Property>>;
+json element = file["array"][1] -> json(type == _array) //outputs nested array
+element[2] 
