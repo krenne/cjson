@@ -94,6 +94,7 @@ struct Range{
     int end;
 };
 
+
 //get range of the body of an array
 Range get_array(string test = ""){
     int opening = 0;
@@ -134,15 +135,4 @@ Range get_object(string test = ""){
     }
 
     return {0, 0};
-}
-
-int main(){
-    cout << "Get Boolean: " << get_bool("true") << endl;
-    cout << "Get Number: " << get_number("580") << endl;
-    cout << "Get String: " << get_string(R"("hello")") << endl;
-    Range array_range = get_array(R"([0, 1, 2, "Hello World!!!", 1.23, [3, 2, 1, 0]])");
-    cout << "Get Array: {" << array_range.start << ", " << array_range.end << "}\n"; 
-    Range object_range = get_object(R"({"hello", {"world", true}})");
-    cout << "Get Object: {" << object_range.start << ", " << object_range.end << "}\n";
-    return 0;
 }
