@@ -9,6 +9,16 @@ extern int index;
 
 #endif
 
+class JSTR{
+    public:
+        std::string jstr;
+        int index;
+
+        char get_next();
+};
+
+JSTR _jstr;
+
 std::string get_bool(std::string test = "");
 
 std::string get_number(std::string test = "");
