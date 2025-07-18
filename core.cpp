@@ -7,10 +7,10 @@ struct Range{
     int end;
 };
 
-class JSTR{       
+class JSTR{
     private:
-        std::string content;
-        
+        std::string content; 
+
     public:
         int index;
         int line;
@@ -18,6 +18,10 @@ class JSTR{
         JSTR(std::string test = ""){
             index = 0;
             line = 1;
+
+            if (!test.empty()){
+                content = test;
+            }
         }
         
         char current(){
@@ -52,10 +56,6 @@ class JSTR{
             }
         }
 
-        void go_to(int dest){
-            index = dest;
-        }
-
         //set the variables for a test
         void set_test(std::string test_case){
             content = test_case;
@@ -63,16 +63,26 @@ class JSTR{
             line = 1;
         }
 
-        //print the characters of an object/array
-        void print_range(Range range){
-            go_to(range.start);
-            while (index <= range.end){
-                std::cout << current(); 
-                index++;
-            }
-            std::cout << std::endl;
-        }
+        //'print_range' and 'open' methods are defined in parse.cpp 
+        //(the compiler gave me trouble when defining them here)
 };
+
+std::string get_null(JSTR &jstr, std::string test = ""){
+    if (!test.empty()){
+        jstr.set_test(test);
+    }
+
+    std::string null = "null";
+    for (char character : null) {
+        if (jstr.current() != character) {
+            std::cout << "ERROR: Expected Null (Line: " << jstr.line << ")" << std::endl;
+            return "";
+        }
+        jstr.next();
+    }
+
+    return null;
+}
 
 std::string get_bool(JSTR &jstr, std::string test = ""){
     std::string boolean;
@@ -85,13 +95,14 @@ std::string get_bool(JSTR &jstr, std::string test = ""){
     } else if (jstr.current() == 'f') {
         boolean = "false";
     } else {
-        std::cout << "ERROR: function not called on 'true' or 'false'." << std::endl;
+        std::cout << "ERROR: Function Not Called On 'true' Or 'false'. (Line: " << jstr.line << ")" << std::endl;
         return "";
     }
 
     for (char character : boolean) {
+
         if (jstr.current() != character) {
-            std::cout << "ERROR: Characters Don't Match" << std::endl;
+            std::cout << "ERROR: Expected True Or False" << std::endl;
             return "";
         }
         jstr.next();
@@ -107,7 +118,13 @@ std::string get_number(JSTR &jstr, std::string test = ""){
     }
 
     while (jstr.current() != '\0') {
-        if (jstr.current() == ' ' || jstr.current() == ',') return number;
+        switch(jstr.current()){
+            case ' ':
+            case ',':
+            case ']':
+            case '}':
+                return number;
+        }
         if (isdigit(jstr.current()) || jstr.current() == '-' || jstr.current() == '.'){
             number += jstr.current();
             jstr.next();
@@ -163,7 +180,7 @@ Range get_array(JSTR &jstr, std::string test = ""){
         jstr.next();
     }
 
-    std::cout << "ERROR: Could Not Find Closing Curly Brace -> ']'" << std::endl;
+    std::cout << "ERROR: Could Not Find Closing Square Bracket -> ']'" << std::endl;
     return {0, 0};
 }
 
